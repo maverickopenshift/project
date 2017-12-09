@@ -221,59 +221,34 @@
 
 
           @if($doc_type->name=="turnkey" || $doc_type->name=="sp")
-          <div class="form-horizontal" style="border: 1px solid #d2d6de;padding: 10px;position: relative;margin-top: 15px;margin-bottom: 33px;">
-            @if(count($doc->po)>0)
-          <div class="form-group ">
-            <label class="col-sm-2 control-label">No.PO</label>
-            <div class="col-sm-10 text-me">{{$doc->po->po_no or '-'}}</div>
-          </div>
-          <div class="form-group ">
-            <label class="col-sm-2 control-label">Tanggal Buat</label>
-            <div class="col-sm-10 text-me">{{$doc->po->po_date or '-'}}</div>
-          </div>
-          <div class="form-group ">
-            <label class="col-sm-2 control-label">Nama Vendor</label>
-            <div class="col-sm-10 text-me">{{$doc->po->po_vendor or '-'}}</div>
-          </div>
-          <div class="form-group ">
-            <label class="col-sm-2 control-label">Nama Pembuat</label>
-            <div class="col-sm-10 text-me">{{$doc->po->po_pembuat or '-'}}</div>
-          </div>
-          <div class="form-group ">
-            <label class="col-sm-2 control-label">Nama Approval</label>
-            <div class="col-sm-10 text-me">{{$doc->po->po_approval or '-'}}</div>
-          </div>
-          <div class="form-group ">
-            <label class="col-sm-2 control-label">Nama Penandatangan</label>
-            <div class="col-sm-10 text-me">{{$doc->po->po_penandatangan or '-'}}</div>
-          </div>
-        @else
-          <div class="form-group ">
-            <label class="col-sm-2 control-label">No.PO</label>
-            <div class="col-sm-10 text-me">-</div>
-          </div>
-          <div class="form-group ">
-            <label class="col-sm-2 control-label">Tanggal Buat</label>
-            <div class="col-sm-10 text-me">-</div>
-          </div>
-          <div class="form-group ">
-            <label class="col-sm-2 control-label">Nama Vendor</label>
-            <div class="col-sm-10 text-me">-</div>
-          </div>
-          <div class="form-group ">
-            <label class="col-sm-2 control-label">Nama Pembuat</label>
-            <div class="col-sm-10 text-me">-</div>
-          </div>
-          <div class="form-group ">
-            <label class="col-sm-2 control-label">Nama Approval</label>
-            <div class="col-sm-10 text-me">-</div>
-          </div>
-          <div class="form-group ">
-            <label class="col-sm-2 control-label">Nama Penandatangan</label>
-            <div class="col-sm-10 text-me">-</div>
-          </div>
-        @endif
-      </div>
+          <input type="hidden" id="view_po_val" name="po_no" value="{{$doc->doc_po_no}}">
+          <div class="form-horizontal parent-potables" style="border: 1px solid #d2d6de;padding: 10px;position: relative;margin-top: 15px;margin-bottom: 33px;display:none;">
+              <table class="table" id="parentPO">
+                <tbody>
+                </tbody>
+              </table>
+              <table class="table table-condensed table-striped" id="potables">
+                  <thead>
+                  <tr>
+                      <th>No.</th>
+                      <th>Kode Item</th>
+                      <th>Item</th>
+                      <th>Qty</th>
+                      <th>Satuan</th>
+                      <th>Currency</th>
+                      <th>Harga Total</th>
+                      <th>Delivery Date</th>
+                      <th>No PR</th>
+                      <th>Keterangan</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="loading-tr">
+                      <td colspan="10" class="text-center"><img src="{{asset('/images/loader.gif')}}" title="please wait..."/></td>
+                    </tr>
+                  </tbody>
+              </table>
+            </div>
           @endif
           @include('documents::partials.buttons-view')
       </div>
@@ -281,9 +256,13 @@
 <!-- /.box-body -->
 </div>
 @push('scripts')
+<script src="{{ mix('js/po_sap.js') }}"></script>
 <script>
 $(function() {
-
+  var view_po_val = $('#view_po_val').val();
+  if(view_po_val!=""){
+    render_po(view_po_val);
+  }
 });
 </script>
 @endpush

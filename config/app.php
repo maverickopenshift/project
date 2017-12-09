@@ -17,6 +17,17 @@ return [
     'ppn_set' => 10,
 
     'password_default' => str_random(8),
+    
+    'sap' => [
+        'ashost' => '10.0.128.9',
+        'sysnr'  => '00',
+        'client' => '300',
+        'user'   => 'abap1',
+        'passwd' => 'Telkom2017',
+    ],
+    'soap_sap_po' => 'http://simteldev.telkom.co.id:1080/sap/bc/srt/wsdl/bndg_9DB6205AB3173237E10000000A008009/wsdl11/allinone/standard/document?sap-client=300',
+    'soap_sap_material' => 'http://simteldev.telkom.co.id:1080/sap/bc/srt/wsdl/bndg_76B6205AB3173237E10000000A008009/wsdl11/allinone/standard/document?sap-client=300',
+    'soap_sap_vendor' => 'http://simteldev.telkom.co.id:1080/sap/bc/srt/wsdl/bndg_14DD265A997C3737E10000000A008009/wsdl11/allinone/standard/document?sap-client=300',
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -41,7 +52,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -106,7 +117,7 @@ return [
     |
     */
 
-    'key' => env('APP_KEY'),
+    'key' => env('APP_KEY','base64:COk5iJae3EigFpAjVIvsmGPNW40OpuTNtXQa0r2OZw0='),
 
     'cipher' => 'AES-256-CBC',
 

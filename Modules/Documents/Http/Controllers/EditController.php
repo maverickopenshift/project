@@ -193,6 +193,10 @@ class EditController extends Controller
     $data['page_title'] = 'Edit Dokumen';
     $data['doc_type'] = $dt->jenis->type;
     $data['doc'] = $dt;
+    $data['pegawai_pihak1'] = \DB::table('pegawai')->where('n_nik',$dt->doc_pihak1_nama)->first();
+    $data['pegawai_konseptor'] = \DB::table('users_pegawai as a')
+                                ->join('pegawai as b','a.nik','=','b.n_nik')
+                                ->where('a.users_id',$dt->user_id)->first();
      // dd($dt->toArray());
     $data['pegawai'] = \App\User::get_user_pegawai();
     $data['action_type'] = 'edit';

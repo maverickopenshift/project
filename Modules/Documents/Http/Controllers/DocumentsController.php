@@ -20,6 +20,8 @@ use App\Helpers\Helpers;
 use Validator;
 use Auth;
 
+use Modules\Documents\Entities\Sap;
+
 class DocumentsController extends Controller
 {
     protected $documents;
@@ -235,8 +237,8 @@ class DocumentsController extends Controller
       if (empty($search)) {
         return Response::json(['status'=>false]);
       }
-      $sql = \DB::table('dummy_po')->where('no_po','=',$search)->get();
-      return Response::json(['status'=>true,'data'=>$sql,'length'=>count($sql)]);
+      $sap = Sap::get_po($search); 
+      return Response::json($sap);
     }
 
     public function getPic(Request $request){

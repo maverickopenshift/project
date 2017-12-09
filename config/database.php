@@ -41,11 +41,11 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'host' => env('DB_HOST', getenv('MARIADBCONSYS_SERVICE_HOST')),
+            'port' => env('DB_PORT', getenv('MARIADBCONSYS_SERVICE_PORT')),
+            'database' => env('DB_DATABASE',  'consys'),
+            'username' => env('DB_USERNAME',  'consys'),
+            'password' => env('DB_PASSWORD',  'consys2017!'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',

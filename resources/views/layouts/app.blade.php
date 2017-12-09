@@ -43,7 +43,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
         ]); ?>;
+        var routes = {};
     </script>
+    @permission('lihat-kontrak|tambah-kontrak')
+      <script>
+        routes.getPO = '{!! route('doc.get-po') !!}';
+      </script>
+    @endpermission
 </head>
 <body class="skin-red-light">
 <div class="wrapper">
